@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --theme-color: #eee;
+    --sub-theme-color: #ddd;
+    --section-color: #999;
+    --main-color: #0af;
+    --sub-color: #05f;
+    --other-color: #fa0;
+    
+    /* Header */
+    --header-top-color: #eee;
+    --header-bottom-color: #ddd;
+    --header-text-color: #333;
+
+    /* Aside */
+    --aside-color: #eee;
+    --aside-text-color: #333;
+
+    --product-image-size: 400px;
+    --product-buy-size: 300px;
+}
+
+body {
+    background-color: var(--theme-color);
+    color: #333;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        font-size: 0.9em;
+    }
+}
