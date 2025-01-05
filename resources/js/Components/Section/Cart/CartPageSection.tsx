@@ -10,10 +10,11 @@ import PageLoading from "@/Components/Progress/PageLoading";
 type Props = {
     updateCnt: number;
     setUpdateCnt: Dispatch<SetStateAction<number>>;
+    disabledStatus: string;
 };
 
 const CartPageSection: FC<Props> = (props) => {
-    const { updateCnt, setUpdateCnt } = props;
+    const { updateCnt, setUpdateCnt, disabledStatus } = props;
 
     const { loading, carts, getCarts } = useCart();
 
@@ -33,7 +34,10 @@ const CartPageSection: FC<Props> = (props) => {
             >
 
                 <GridItem col={{ base: "1 / 4", lg: "1 / 2" }}>
-                    <TotalSection updateCnt={updateCnt} />
+                    <TotalSection
+                        updateCnt={updateCnt}
+                        disabledStatus={disabledStatus}
+                    />
                 </GridItem>
 
                 <GridItem col={{ base: "1 / 4", lg: "2 / 4" }}>

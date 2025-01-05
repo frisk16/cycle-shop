@@ -72,6 +72,8 @@ class UserController extends AdminController
         $show->field('email', __('Email'));
         $show->field('email_verified_at', __('Email verified at'));
         $show->field('password', __('Password'));
+        $show->field('postal_code', '郵便番号');
+        $show->field('phone_number', '電話番号');
         $show->field('area', '都道府県');
         $show->field('address', '住所');
         $show->field('remember_token', __('Remember token'));
@@ -125,6 +127,12 @@ class UserController extends AdminController
         $form->datetime('email_verified_at', __('Email verified at'))->default(date('Y-m-d H:i:s'));
         $form->password('password', __('Password'))->rules('max:255', [
             'max' => '文字数オーバー',
+        ]);
+        $form->text('postal_code', '郵便番号')->rules('max:7', [
+            'max' => '7桁まで',
+        ]);
+        $form->text('phone_number', '電話番号')->rules('max:12', [
+            'max' => '12桁まで',
         ]);
         $form->select('area', '都道府県')->options($areas);
         $form->text('address', '住所')->rules('max:255', [

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -63,6 +64,11 @@ Route::controller(CartController::class)->group(function() {
     Route::post('/carts/api/add', 'add')->name('carts.add');
     Route::post('/carts/api/destroy', 'destroy')->name('carts.destroy');
     Route::put('/carts/api/update_qty', 'update_qty')->name('carts.update_qty');
+});
+
+// Order
+Route::middleware(['auth', 'verified'])->controller(OrderController::class)->group(function() {
+    Route::get('/orders/confirm', 'confirm')->name('orders.confirm');
 });
 
 require __DIR__.'/auth.php';

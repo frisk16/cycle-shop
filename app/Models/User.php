@@ -34,6 +34,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'image_url',
         'email',
         'password',
+        'postal_code',
+        'phone_number',
         'area',
         'address',
         'enabled',
@@ -67,5 +69,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function carts()
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

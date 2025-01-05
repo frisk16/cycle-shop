@@ -16,7 +16,24 @@ class CartController extends Controller
     public function index()
     {
         //
-        return Inertia::render('Cart/Index');
+        $user = Auth::user();
+        $disabled_status = "";
+        if(!$user) {
+            $disabled_status = "nonAuthUser";
+        } else {
+            if(
+                $user->postal_code === NULL ||
+                $user->phone_number === NULL ||
+                $user->area === NULL ||
+                $user->address === NULL
+            ) {
+                $disabled_status = "nonUserDetail";
+            }
+        }
+        
+        return Inertia::render('Cart/Index', [
+            'disabledStatus' => $disabled_status,
+        ]);
     }
 
     /**

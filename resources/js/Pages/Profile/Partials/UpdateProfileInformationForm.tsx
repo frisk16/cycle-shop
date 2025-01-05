@@ -27,6 +27,8 @@ const UpdateProfileInformation: FC<Props> = memo((props) => {
     const { data, setData, patch, errors, processing } = useForm({
         name: auth.user.name,
         email: auth.user.email,
+        postal_code: auth.user.postal_code,
+        phone_number: auth.user.phone_number,
         area: auth.user.area,
         address: auth.user.address,
     });
@@ -81,6 +83,32 @@ const UpdateProfileInformation: FC<Props> = memo((props) => {
                                     onChange={(e) => setData('email', e.target.value)}
                                 />
                                 <FormError>{errors.email}</FormError>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label htmlFor="postal_code">郵便番号</Label>
+                                <Input
+                                    id="postal_code"
+                                    type="text"
+                                    placeholder="ハイフン無し"
+                                    isInvalid={errors.postal_code !== undefined}
+                                    value={data.postal_code}
+                                    onChange={(e) => setData('postal_code', e.target.value)}
+                                />
+                                <FormError>{errors.postal_code}</FormError>
+                            </FormGroup>
+
+                            <FormGroup>
+                                <Label htmlFor="phone_number">電話番号</Label>
+                                <Input
+                                    id="phone_number"
+                                    type="text"
+                                    placeholder="ハイフン無し"
+                                    isInvalid={errors.phone_number !== undefined}
+                                    value={data.phone_number}
+                                    onChange={(e) => setData('phone_number', e.target.value)}
+                                />
+                                <FormError>{errors.phone_number}</FormError>
                             </FormGroup>
 
                             <FormGroup>

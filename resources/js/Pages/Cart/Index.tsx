@@ -4,7 +4,13 @@ import DefaultLayout from "@/Layouts/DefaultLayout";
 import { Head } from "@inertiajs/react";
 import { FC } from "react";
 
-const Index: FC = () => {
+type PageProps = {
+    disabledStatus: string;
+};
+
+const Index: FC<PageProps> = (props) => {
+    const { disabledStatus } = props;
+
     const { updateCnt, setUpdateCnt } = useCart();
 
     return (
@@ -14,6 +20,7 @@ const Index: FC = () => {
             <CartPageSection
                 updateCnt={updateCnt}
                 setUpdateCnt={setUpdateCnt}
+                disabledStatus={disabledStatus}
             />
 
         </DefaultLayout>

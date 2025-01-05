@@ -4,6 +4,8 @@ export interface User {
     image_url: string;
     email: string;
     email_verified_at: string;
+    postal_code: string;
+    phone_number: string;
     area: string;
     address: string;
 }
