@@ -30,19 +30,19 @@ const ProductCard2: FC<Props> = memo((props) => {
 
     return (
         <Link href={route("products.show", product!.id)}>
-            <Flex justify={{ lg: "center" }} direction={{ base: "column" }}>
-                <Box w={{ base: "100%", lg: "160px" }} h={{ base: "100%", lg: "140px" }}>
+            <Flex justify={{ lg: "center" }}>
+                <Box w={{ lg: "160px" }} h={{ lg: "140px" }}>
                     <Image h={{ lg: "100%" }} src={imageUrl+product!.image_url} />
                 </Box>
                 <Card
-                    h={{ base: "100%", lg: "140px" }}
+                    h={{ lg: "140px" }}
                     w={{ lg: "100%" }}
                 >
                     <CardHeader bg="var(--main-color)" color="#fff">
                         <h5>{product!.name}</h5>
                     </CardHeader>
                     <CardBody>
-                        <Flex gap={{ lg: "16px" }}>
+                        <Flex gap={{ lg: "16px" }} justify={{ lg: "space-between" }}>
                             <Text
                                 fontSize="1.2em"
                                 fontWeight="bold"
@@ -50,7 +50,9 @@ const ProductCard2: FC<Props> = memo((props) => {
                             >
                                 ￥{getFormatNumber(product!.price)}円
                             </Text>
-                            <ScoreBar status={avgScore} />
+                            <Box>
+                                <ScoreBar status={avgScore} />
+                            </Box>
                         </Flex>
                     </CardBody>
                 </Card>

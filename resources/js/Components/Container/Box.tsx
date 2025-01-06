@@ -9,7 +9,7 @@ type Props = {
     right?: string | number;
     left?: string | number;
     float?: string;
-    display?: { base?: string, lg?: string };
+    display?: { base?: string, md?: string, lg?: string };
     m?: { base?: string | number, lg?: string | number };
     p?: { base?: string | number, lg?: string | number };
     w?: { base?: string, lg?: string };
@@ -61,5 +61,9 @@ const BoxDiv = styled.div<{props: Props}>`
         text-align: ${(align) => align.props.textAlign?.base};
         display: ${(d) => d.props.display?.base};
         transform: ${(trans) => trans.props.transform?.base};
+    }
+
+    @media screen and (max-width: 1100px) {
+        display: ${(d) => d.props.display?.md};
     }
 `;

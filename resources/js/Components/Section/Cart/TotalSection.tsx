@@ -33,7 +33,7 @@ const TotalSection: FC<Props> = memo((props) => {
 
     return (
         <section>
-            <Box display={{ base: "none", lg: "block" }}>
+            <Box display={{ md: "none", lg: "block" }}>
                 <Card shadow>
                     <CardBody>
                         <Flex
@@ -165,7 +165,7 @@ const PhoneNavDiv = styled.div`
     right: 0;
     z-index: 10;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1100px) {
         display: flex;
     }
 `;

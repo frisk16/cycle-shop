@@ -16,6 +16,7 @@ import CartQtyForm from "../Form/CartQtyForm";
 import DangerButton from "../Button/DangerButton";
 import { FaTrashAlt } from "react-icons/fa";
 import useCart from "@/Fooks/Api/useCart";
+import TrashButton from "../Button/TrashButton";
 
 type Props = {
     product: Product | null;
@@ -48,24 +49,26 @@ const CartProductCard: FC<Props> = memo((props) => {
     return (
         <Flex
             justify={{ lg: "center" }}
-            direction={{ base: "column" }}
-            w={{ base: "90%" }}
-            m={{ base: "auto" }}
         >
             <Link href={product ? route("products.show", product.id) : "#"}>
-                <Box w={{ base: "100%", lg: "160px" }} h={{ base: "100%", lg: "140px" }}>
+                <Box w={{ lg: "160px" }} h={{  base: "180px", lg: "140px" }}>
                     <Image h={{ lg: "100%" }} src={imageUrl+product?.image_url} />
                 </Box>
             </Link>
             <Card
-                h={{ base: "100%", lg: "140px" }}
+                h={{ base: "180px", lg: "140px" }}
                 w={{ lg: "100%" }}
             >
                 <CardHeader bg="var(--main-color)" color="#fff">
                     <h5>{product?.name}</h5>
                 </CardHeader>
                 <CardBody>
-                    <Flex gap={{ lg: "16px" }}>
+                    <Flex
+                        direction={{ base: "column" }}
+                        justify={{ lg: "space-between" }}
+                        align={{ base: "start" }}
+                        gap={{ base: "8px" }}
+                    >
                         <Text
                             fontSize="1.2em"
                             fontWeight="bold"
@@ -74,25 +77,23 @@ const CartProductCard: FC<Props> = memo((props) => {
                             ￥{getFormatNumber(product && product.price)}円
                         </Text>
 
-                        <ScoreBar status={avgScore} />
+                        <Flex gap={{ lg: "16px" }}>
+                            {/* 数量変更ボタン */}
+                            <Box>
+                                {product && (
+                                    <CartQtyForm
+                                        productId={product.id}
+                                        qty={qty}
+                                        setUpdateCnt={setUpdateCnt}
+                                    />
+                                )}
+                            </Box>
 
-                        {/* 数量変更ボタン */}
-                        <Box m={{ lg: "0 0 0 auto" }}>
-                            {product && (
-                                <CartQtyForm
-                                    productId={product.id}
-                                    qty={qty}
-                                    setUpdateCnt={setUpdateCnt}
-                                />
-                            )}
-                        </Box>
-
-                        {/* 削除ボタン */}
-                        <Box>
-                            <DangerButton sm onClick={onSubmitDelete}>
-                                <FaTrashAlt />
-                            </DangerButton>
-                        </Box>
+                            {/* 削除ボタン */}
+                            <Box>
+                                <TrashButton onClick={onSubmitDelete} />
+                            </Box>
+                        </Flex>
                     </Flex>
                 </CardBody>
             </Card>

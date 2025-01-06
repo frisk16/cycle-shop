@@ -6,6 +6,7 @@ import { Product } from "@/types/base/product";
 import { FC } from "react";
 import CheckoutSection from "./CheckoutSection";
 import DetailSection from "./DetailSection";
+import Title from "@/Components/Text/Title";
 
 type Props = {
     order: Order | null;
@@ -18,6 +19,7 @@ const ConfirmPageSection: FC<Props> = (props) => {
 
     return (
         <Container size="xl">
+            <Title m={{ lg: "0 0 32px" }} line>注文内容の確認</Title>
             <Grid
                 templateCols="repeat(3, 1fr)"
                 gap={{ lg: "32px" }}

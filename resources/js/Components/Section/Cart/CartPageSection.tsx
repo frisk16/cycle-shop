@@ -33,14 +33,14 @@ const CartPageSection: FC<Props> = (props) => {
                 gap={{ lg: "32px" }}
             >
 
-                <GridItem col={{ base: "1 / 4", lg: "1 / 2" }}>
+                <GridItem col={{ md: "1 / 4", lg: "1 / 2" }}>
                     <TotalSection
                         updateCnt={updateCnt}
                         disabledStatus={disabledStatus}
                     />
                 </GridItem>
 
-                <GridItem col={{ base: "1 / 4", lg: "2 / 4" }}>
+                <GridItem col={{ md: "1 / 4", lg: "2 / 4" }}>
                     <MainSection
                         carts={carts}
                         setUpdateCnt={setUpdateCnt}

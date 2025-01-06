@@ -31,6 +31,7 @@ const ScoreSpan = styled.span<{ props: Props }>`
     &::before {
         content: '★★★★★';
         position: absolute;
+        word-break: normal;
         width: 5em;
         color: #aaa;
     }
