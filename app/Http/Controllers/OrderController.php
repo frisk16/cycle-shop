@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderedProduct;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -80,7 +82,46 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-        
+        $new_order = Order::create([
+          'user_id' => Auth::id(),
+          'order_code' => substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyz'), 0, 15),
+          'des_name' => $request->desName,
+          'des_postal_code' => $request->desPostalCode,
+          'des_address' => $request->desAddress,
+          'des_phone_number' => $request->desPhoneNumber,
+          'postage' => $request->postage,
+          'total_qty' => $request->totalQty,
+          'total_price' => $request->totalPrice
+        ]);
+
+        if($new_order) {
+            foreach($request->products as $product) {
+                OrderedProduct::create([
+                    'order_id' => $new_order->id,
+                    'product_id' => $product->id,
+                    'qty' => $request->productQty[$product->id],
+                    'price' => $product->price,
+                    'postage' => $product->postage ? 500 : 0,
+                    'completed' => FALSE
+                ]);
+            }
+        }
+
+        return to_route('orders.complete', ['order_code' => $new_order->order_code]);
+    }
+
+    /**
+     * 注文完了ページ
+     */
+    public function complete(Request $request)
+    {
+        // 
+        $target_order = Auth::user()->orders()->where('order_code', $request->order_code)->first();
+        if(!$target_order) {
+            return redirect()->to('/');
+        }
+
+        return Inertia::render('Order/Complete');
     }
 
     /**

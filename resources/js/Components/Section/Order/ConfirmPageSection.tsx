@@ -15,8 +15,6 @@ type Props = {
 };
 
 const ConfirmPageSection: FC<Props> = (props) => {
-    const { order, products, productQty } = props;
-
     return (
         <Container size="xl">
             <Title m={{ lg: "0 0 32px" }} line>注文内容の確認</Title>
@@ -27,8 +25,7 @@ const ConfirmPageSection: FC<Props> = (props) => {
 
                 <GridItem col={{ base: "1 / 4", lg: "1 / 2" }}>
                     <CheckoutSection
-                        totalPrice={order!.total_price}
-                        postage={order!.postage}
+                        {...props}
                     />
                 </GridItem>
 
