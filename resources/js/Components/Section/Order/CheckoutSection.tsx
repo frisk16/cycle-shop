@@ -2,8 +2,10 @@ import PrimaryButton from "@/Components/Button/PrimaryButton";
 import Card from "@/Components/Card/Card";
 import CardBody from "@/Components/Card/CardBody";
 import Box from "@/Components/Container/Box";
+import PageLoading from "@/Components/Progress/PageLoading";
 import Text from "@/Components/Text/Text";
 import Title from "@/Components/Text/Title";
+import useOrder from "@/Fooks/Api/useOrder";
 import useFormat from "@/Fooks/useFormat";
 import { Order } from "@/types/base/order";
 import { Product } from "@/types/base/product";
@@ -22,7 +24,9 @@ const CheckoutSection: FC<Props> = memo((props) => {
 
     const { getFormatNumber } = useFormat();
 
-    const {data, processing} = useForm({
+    const { loading, addOrder } = useOrder();
+
+    const { data } = useForm({
         desName: order!.des_name,
         desPostalCode: order!.des_postal_code,
         desAddress: order!.des_address,
@@ -34,8 +38,16 @@ const CheckoutSection: FC<Props> = memo((props) => {
         productQty: productQty
     });
 
+    const onSubmit = () => {
+        addOrder(data);
+    };
+
     return (
         <section>
+            {loading && (
+                <PageLoading />
+            )}
+
             <Box display={{ base: "none", lg: "block" }}>
                 <Card shadow>
                     <CardBody>
@@ -51,7 +63,12 @@ const CheckoutSection: FC<Props> = memo((props) => {
                             </Text>
                         </Box>
                         <Box w={{ lg: "100%" }} m={{ lg: "16px 0 0" }}>
-                            <PrimaryButton w={{ lg: "100%" }}>注文を確定する</PrimaryButton>
+                            <PrimaryButton
+                                w={{ lg: "100%" }}
+                                onClick={onSubmit}
+                            >
+                                注文を確定する
+                            </PrimaryButton>
                         </Box>
                     </CardBody>
                 </Card>
@@ -70,7 +87,7 @@ const CheckoutSection: FC<Props> = memo((props) => {
                     </Text>
                 </Box>
                 <Box>
-                    <PrimaryButton>注文を確定する</PrimaryButton>
+                    <PrimaryButton onClick={onSubmit}>注文を確定する</PrimaryButton>
                 </Box>
             </PhoneNavDiv>
         </section>

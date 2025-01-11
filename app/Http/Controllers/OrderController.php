@@ -94,20 +94,29 @@ class OrderController extends Controller
           'total_price' => $request->totalPrice
         ]);
 
-        if($new_order) {
+        if(!empty($new_order)) {
             foreach($request->products as $product) {
                 OrderedProduct::create([
                     'order_id' => $new_order->id,
-                    'product_id' => $product->id,
-                    'qty' => $request->productQty[$product->id],
-                    'price' => $product->price,
-                    'postage' => $product->postage ? 500 : 0,
+                    'product_id' => $product['id'],
+                    'qty' => $request->productQty[$product['id']],
+                    'price' => $product['price'],
+                    'postage' => $product['postage'],
                     'completed' => FALSE
                 ]);
             }
+
+            $carts = Auth::user()->carts;
+            foreach($carts as $cart) {
+                $cart->delete();
+            }
         }
 
-        return to_route('orders.complete', ['order_code' => $new_order->order_code]);
+        $response = [
+            'orderCode' => $new_order->order_code,
+        ];
+
+        return response()->json($response);
     }
 
     /**

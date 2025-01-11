@@ -1,3 +1,5 @@
+import { Product } from "./product";
+
 export type Order = {
     id: number;
     user_id: number;
@@ -10,4 +12,16 @@ export type Order = {
     total_qty: number;
     total_price: number;
     created_at: string;
+};
+
+export type OrderForm = {
+    desName: string;
+    desPostalCode: string;
+    desAddress: string;
+    desPhoneNumber: string;
+    postage: number;
+    totalQty: number;
+    totalPrice: number;
+    products: Array<Product>;
+    productQty: Array<number>;
 };
