@@ -5,7 +5,7 @@ export type Product = {
         image_url: string;
         price: number;
         description: string;
-        postage: boolean;
+        postage: number;
         recommend: boolean;
         pop: boolean;
         enabled: boolean;

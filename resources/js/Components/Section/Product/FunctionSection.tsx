@@ -35,8 +35,8 @@ const FunctionSection: FC<Props> = memo((props) => {
                                 />
 
                                 <Text fontSize="0.9em">
-                                    ※送料は全国一律
-                                    <Text fontWeight="bold">￥500円</Text>
+                                    ※送料
+                                    <Text fontWeight="bold">￥{product!.postage}円</Text>
                                 </Text>
 
                             </Flex>

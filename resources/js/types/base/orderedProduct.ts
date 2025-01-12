@@ -4,7 +4,7 @@ export type OrderedProduct = {
     product_id: number;
     qty: number;
     price: number;
-    postage: boolean;
+    postage: number;
     completed: boolean;
     created_at: string;
 };

@@ -32,7 +32,7 @@ class ProductController extends AdminController
         $grid->column('category.name', 'カテゴリー');
         $grid->column('name', '名前');
         $grid->column('price', '価格');
-        $grid->column('postage', '送料')->editable('select', [0 => '無料', 1 => '有料']);
+        $grid->column('postage', '送料');
         $grid->column('recommend', 'おすすめ')->editable('select', [0 => '無し', 1 => 'おすすめ']);
         $grid->column('pop', '人気')->editable('select', [0 => '無し', 1 => '人気']);
         $grid->column('enabled', '公開')->editable('select', [0 => '無効', 1 => '公開']);
@@ -48,7 +48,7 @@ class ProductController extends AdminController
             $filter->in('category_id', 'カテゴリー')->multipleSelect(Category::all()->pluck('name', 'id'));
             $filter->like('name', '名前');
             $filter->between('price', '価格');
-            $filter->equal('postage', '送料')->radio(['' => '全て', 0 => '無料', 1 => '有料']);
+            $filter->between('postage', '送料');
             $filter->equal('recommend', 'おすすめ')->radio(['' => '全て', 0 => '無し', 1 => 'おすすめ']);
             $filter->equal('pop', '人気')->radio(['' => '全て', 0 => '無し', 1 => '人気']);
             $filter->equal('enabled', '公開')->radio(['' => '全て', 0 => '無効', 1 => '公開']);
@@ -74,7 +74,7 @@ class ProductController extends AdminController
         $show->field('image_url', '画像URL');
         $show->field('price', '価格');
         $show->field('description', '詳細');
-        $show->field('postage', '送料')->using([0 => '無料', 1 => '有料']);
+        $show->field('postage', '送料');
         $show->field('recommend', 'おすすめ')->using([0 => '無し', 1 => 'おすすめ']);
         $show->field('pop', '人気')->using([0 => '無し', 1 => '人気']);
         $show->field('enabled', '公開')->using([0 => '無効', 1 => '公開']);
@@ -110,7 +110,9 @@ class ProductController extends AdminController
             'min' => '最低:min文字以上',
             'max' => ':max文字まで',
         ]);
-        $form->switch('postage', '送料');
+        $form->number('postage', '送料')->rules('numeric|min:0', [
+            'min' => '￥:min円以上',
+        ]);
         $form->switch('recommend', 'おすすめ');
         $form->switch('pop', '人気');
         $form->switch('enabled', '公開')->default(1);

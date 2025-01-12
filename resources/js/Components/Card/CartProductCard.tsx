@@ -4,7 +4,6 @@ import Card from "./Card";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import Box from "../Container/Box";
-import ScoreBar from "../Progress/ScoreBar";
 import Text from "../Text/Text";
 import useAws from "@/Fooks/useAws";
 import { Link } from "@inertiajs/react";
@@ -13,8 +12,6 @@ import useReview from "@/Fooks/Api/useReview";
 import Flex from "../Container/Flex";
 import Image from "../Image/Image";
 import CartQtyForm from "../Form/CartQtyForm";
-import DangerButton from "../Button/DangerButton";
-import { FaTrashAlt } from "react-icons/fa";
 import useCart from "@/Fooks/Api/useCart";
 import TrashButton from "../Button/TrashButton";
 
@@ -29,7 +26,7 @@ const CartProductCard: FC<Props> = memo((props) => {
 
     const { imageUrl } = useAws();
     const { getFormatNumber } = useFormat();
-    const { avgScore, getAvgScore } = useReview();
+    const { getAvgScore } = useReview();
     const { status, deleteCart } = useCart();
 
     useEffect(() => {

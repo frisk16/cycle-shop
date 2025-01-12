@@ -40,12 +40,12 @@ class OrderController extends Controller
                 return redirect()->to('/');
             }
 
-            $postage = FALSE;
+            $postage = 0;
             $total_price = 0;
             foreach($carts as $cart) {
                 $total_price += $cart->product->price * $cart->qty;
-                if($cart->product->postage) {
-                    $postage = TRUE;
+                if($postage < $cart->product->postage) {
+                    $postage = $cart->product->postage;
                 }
             }
 
@@ -55,7 +55,7 @@ class OrderController extends Controller
             $order['des_postal_code'] = substr($user->postal_code, 0, 3).'-'.substr($user->postal_code, 3, 4);
             $order['des_address'] = $user->area.' '.$user->address;
             $order['des_phone_number'] = $user->phone_number;
-            $order['postage'] = $postage ? 500 : 0;
+            $order['postage'] = $postage;
             $order['total_price'] = $total_price;
             $order['total_qty'] = $carts->count();
 

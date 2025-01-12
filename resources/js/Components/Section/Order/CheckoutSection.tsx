@@ -53,10 +53,17 @@ const CheckoutSection: FC<Props> = memo((props) => {
                     <CardBody>
                         <Box>
                             <Title>合計金額</Title>
+                            <Box fontSize="0.9em">
+                                {order!.postage > 0 ? (
+                                    <Text color="#00f">送料：￥{order!.postage}円</Text>
+                                ) : (
+                                    <Text>送料：無料</Text>
+                                )}
+                            </Box>
                             <Text
                                 color="#f00"
                                 fontWeight="bold"
-                                fontSize="1.1em"
+                                fontSize="1.3em"
                                 m={{ lg: "0 0 0 16px" }}
                             >
                                 ￥{getFormatNumber(order!.total_price + order!.postage)}円 (送料込)
@@ -76,6 +83,13 @@ const CheckoutSection: FC<Props> = memo((props) => {
 
             <PhoneNavDiv>
                 <Box>
+                    <Box fontSize="0.9em">
+                        {order!.postage > 0 ? (
+                            <Text color="#0ff">送料：￥{order!.postage}円</Text>
+                        ) : (
+                            <Text color="#fff">送料：無料</Text>
+                        )} 
+                    </Box>
                     <Text fontWeight="bold" color="#fff">合計金額</Text>
                     <Text
                         color="#ff0"

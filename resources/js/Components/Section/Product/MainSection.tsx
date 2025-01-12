@@ -47,8 +47,8 @@ const MainSection: FC<Props> = memo((props) => {
                         ￥{getFormatNumber(product!.price)}円
                     </Text>
                     <Box>
-                        {product!.postage ? (
-                            <Text fontWeight="bold" color="#00c">送料：￥500円</Text>
+                        {product!.postage > 0 ? (
+                            <Text fontWeight="bold" color="#00c">送料：￥{product!.postage}円</Text>
                         ) : (
                             <Text fontWeight="bold" color="#00c">送料：無料</Text>
                         )}

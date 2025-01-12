@@ -133,8 +133,8 @@ class CartController extends Controller
         if($user) {
             foreach($user->carts as $cart) {
                 $total += $cart->product->price * $cart->qty;
-                if($cart->product->postage) {
-                    $postage = 500;
+                if($postage < $cart->product->postage) {
+                    $postage = $cart->product->postage;
                 }
             }
         } else {
@@ -143,9 +143,9 @@ class CartController extends Controller
                 $carts = Cart::where('cookie_code', $code)->get();
                 foreach($carts as $cart) {
                     $total += $cart->product->price * $cart->qty;
-                    if($cart->product->postage) {
-                        $postage = 500;
-                    }
+                    if($postage < $cart->product->postage) {
+                        $postage = $cart->product->postage;
+                    }    
                 }
             }
         }

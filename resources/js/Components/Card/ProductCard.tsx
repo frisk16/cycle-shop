@@ -52,8 +52,8 @@ const ProductCard: FC<Props> = memo((props) => {
                         ￥{getFormatNumber(product!.price)}円
                     </Text>
                     <Text fontSize="0.9em" textAlign="right">
-                        {product!.postage ? (
-                            <Text color="#00c">送料：￥500円</Text>
+                        {product!.postage > 0 ? (
+                            <Text color="#00c">送料：￥{product!.postage}円</Text>
                         ) : (
                             <Text>送料：無料</Text>
                         )}
