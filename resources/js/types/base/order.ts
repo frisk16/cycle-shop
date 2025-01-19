@@ -14,6 +14,14 @@ export type Order = {
     created_at: string;
 };
 
+export type OrderData = {
+    data: Array<Order>;
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+};
+
 export type OrderForm = {
     desName: string;
     desPostalCode: string;

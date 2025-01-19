@@ -68,9 +68,11 @@ Route::controller(CartController::class)->group(function() {
 
 // Order
 Route::middleware(['auth', 'verified'])->controller(OrderController::class)->group(function() {
+    Route::get('/orders', 'index')->name('orders.index');
     Route::get('/orders/confirm', 'confirm')->name('orders.confirm');
     Route::get('/orders/complete', 'complete')->name('orders.complete');
     Route::post('/orders/store', 'store')->name('orders.store');
+    Route::get('/orders/{orderId}', 'show')->name('orders.show');
 });
 
 require __DIR__.'/auth.php';

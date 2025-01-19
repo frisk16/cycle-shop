@@ -15,6 +15,7 @@ type Props = {
     w?: { base?: string, lg?: string };
     h?: { base?: string, lg?: string };
     fontSize?: string;
+    bg?: string;
     textAlign?: { base?: string, lg?: string };
     transform?: { base?: string, lg?: string };
 };
@@ -51,6 +52,7 @@ const BoxDiv = styled.div<{props: Props}>`
     font-size: ${(size) => size.props.fontSize};
     float: ${(f) => f.props.float};
     display: ${(d) => d.props.display?.lg};
+    background-color: ${(bg) => bg.props.bg};
     transform: ${(trans) => trans.props.transform?.lg};
     
     @media screen and (max-width: 768px) {

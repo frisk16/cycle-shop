@@ -12,12 +12,39 @@ class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * 注文履歴ページ
      */
     public function index()
     {
         //
+        $orders = Auth::user()->orders()->orderBy('created_at', 'DESC')->paginate(10);
+
+        return Inertia::render('Order/Index', [
+            'orders' => $orders,
+        ]);
     }
 
+    /**
+     * 各注文毎の詳細ページ
+     */
+    public function show(int $orderId)
+    {
+        // 
+        $order = Auth::user()->orders()->where('id', $orderId)->first();
+        if(!$order) {
+            return redirect()->to('/');
+        }
+        $products = OrderedProduct::where('order_id', $orderId)->get();
+
+        return Inertia::render('Order/Show', [
+            'order' => $order,
+            'products' => $products,
+        ]);
+    }
+
+    /**
+     * 購入確認ページ
+     */
     public function confirm()
     {
         // 
@@ -131,37 +158,5 @@ class OrderController extends Controller
         }
 
         return Inertia::render('Order/Complete');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
     }
 }

@@ -9,6 +9,7 @@ const useProduct = () => {
 
     // 商品取得
     const getProduct = useCallback((productId: number) => {
+        setLoading(true);
         axios.get(route("products.get", productId))
             .then((res) => {
                 setProduct(res.data.product);
@@ -16,7 +17,8 @@ const useProduct = () => {
             .catch((err) => {
                 alert("ERROR: "+err);
                 console.log(err);
-            });
+            })
+            .finally(() => setLoading(false));
     }, []);
 
     // おすすめ商品取得
