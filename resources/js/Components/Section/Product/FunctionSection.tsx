@@ -48,10 +48,11 @@ const FunctionSection: FC<Props> = memo((props) => {
                 <GridItem col={{ md: "1 / 3", lg: "2 / 3" }}>
                     <Card w={{ lg: "100%" }}>
                         <CardBody>
-
+                            
                             <FavoriteButton
+                                onClick={() => {}}
+                                isRegisted={false}
                                 processing={false}
-                                productId={product!.id}
                                 w={{ base: "100%" }}
                                 m={{ lg: "0 auto" }}
                             />

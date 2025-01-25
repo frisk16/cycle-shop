@@ -95,7 +95,7 @@ const Header: FC<Props> = memo((props) => {
                             </a>
                         </li>
                         <li>
-                            <a href="">
+                            <a href={route("favorites.index")}>
                                 <FaHeart />
                                 お気に入り
                             </a>

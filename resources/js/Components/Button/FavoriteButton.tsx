@@ -5,13 +5,14 @@ import styled from "styled-components";
 
 type Props = {
     processing: boolean;
-    productId: number;
     w?: { base?: string,  lg?: string };
-    m?: { base?: string, lg?: string }
+    m?: { base?: string, lg?: string };
+    isRegisted: boolean;
+    onClick: () => void;
 };
 
 const FavoriteButton: FC<Props> = memo((props) => {
-    const { processing, productId } = props;
+    const { processing, isRegisted, onClick } = props;
 
     return (
         <form>
@@ -19,9 +20,10 @@ const FavoriteButton: FC<Props> = memo((props) => {
                 props={props}
                 disabled={processing}
                 data-loading={processing}
-                data-is-favorite={false}
+                data-is-favorite={isRegisted}
+                onClick={onClick}
             >
-                {false ? (
+                {isRegisted ? (
                     <>
                         <FaHeartBroken />
                         お気に入り解除
@@ -65,6 +67,10 @@ const FavoriteButtonStyle = styled.button<{props: Props}>`
         background-color: #f77;
         color: #fff;
     }
+    &[data-loading=true] {
+        background-color: #faa;
+        color: #faa;
+    }
     &:after {
         display: ${(d) => d.props.processing ? "block" : "none"};
         content: '';
@@ -78,10 +84,6 @@ const FavoriteButtonStyle = styled.button<{props: Props}>`
         height: 16px;
         animation: loading 0.5s infinite linear;
     }
-    &[data-loading=true] {
-        background-color: #faa;
-        color: #faa;
-    }
     &[data-is-favorite=true] {
         background-color: #f77;
         color: #fff;
@@ -91,7 +93,7 @@ const FavoriteButtonStyle = styled.button<{props: Props}>`
     }
 
     @keyframes loading {
-        100% { transform: rotate(360deg) }        
+        100% { transform: rotate(360deg); }        
     }
 
     @media screen and (max-width: 768px) {

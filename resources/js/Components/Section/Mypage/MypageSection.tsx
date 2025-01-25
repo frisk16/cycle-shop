@@ -110,7 +110,7 @@ const MypageSection: FC = memo(() => {
                 </GridItem>
 
                 <GridItem col={{ base: "1 / 3", lg: "2 / 3" }}>
-                    <Link href="#">
+                    <Link href={route("favorites.index")}>
                         <Card shadow>
                             <CardBody>
                                 <Flex

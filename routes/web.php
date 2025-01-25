@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -73,6 +74,13 @@ Route::middleware(['auth', 'verified'])->controller(OrderController::class)->gro
     Route::get('/orders/complete', 'complete')->name('orders.complete');
     Route::post('/orders/store', 'store')->name('orders.store');
     Route::get('/orders/{orderId}', 'show')->name('orders.show');
+});
+
+// Favorite
+Route::middleware(['auth', 'verified'])->controller(FavoriteController::class)->group(function() {
+    Route::get('/favorites', 'index')->name('favorites.index');
+
+    Route::post('/favorites/api/toggle', 'toggle')->name('favorites.toggle');
 });
 
 require __DIR__.'/auth.php';
