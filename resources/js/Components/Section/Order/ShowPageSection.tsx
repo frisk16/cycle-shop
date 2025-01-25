@@ -19,7 +19,7 @@ type Props = {
 const ShowPageSection: FC<Props> = memo((props) => {
     const { order, products } = props;
 
-    const { getFormatNumber, getDateTime } = useFormat();
+    const { getDateTime } = useFormat();
 
     return (
         <section>
