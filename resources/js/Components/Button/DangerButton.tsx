@@ -9,6 +9,7 @@ type Props = {
     disabled?: boolean;
     shadow?: boolean;
     sm?: boolean;
+    borderRadius?: string;
     onClick?: () => void;
 };
 
@@ -40,7 +41,7 @@ const DangerButtonStyle = styled.button<{props: Props}>`
     background-color: #f33;
     color: #fff;
     padding: 6px 16px;
-    border-radius: 4px;
+    border-radius: ${(r) => r.props.borderRadius ? r.props.borderRadius : "4px"};
     transition: background-color 0.3s;
     width: ${(w) => w.props.w?.lg};
     margin: ${(m) => m.props.m?.lg};

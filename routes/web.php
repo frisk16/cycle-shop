@@ -80,7 +80,9 @@ Route::middleware(['auth', 'verified'])->controller(OrderController::class)->gro
 Route::middleware(['auth', 'verified'])->controller(FavoriteController::class)->group(function() {
     Route::get('/favorites', 'index')->name('favorites.index');
 
+    Route::get('/favorites/api/get', 'get_all')->name('favorites.get');
     Route::post('/favorites/api/toggle', 'toggle')->name('favorites.toggle');
+    Route::get('/favorites/api/products/{productId}', 'has_registed')->name('favorites.has_registed');
 });
 
 require __DIR__.'/auth.php';

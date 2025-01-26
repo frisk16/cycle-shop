@@ -15,11 +15,42 @@ class FavoriteController extends Controller
     public function index()
     {
         //
+        return Inertia::render('Favorite/Index');
+    }
+
+    /**
+     * お気に入り全取得
+     */
+    public function get_all()
+    {
         $favorites = Auth::user()->favorites()->paginate(10);
 
-        return Inertia::render('Favorite/Index', [
+        $response = [
             'favorites' => $favorites
-        ]);
+        ];
+
+        return response()->json($response);
+    }
+
+    /**
+     * 登録されているかどうか確認
+     */
+    public function has_registed(int $productId)
+    {
+        // 
+        $favorite = Auth::user()->favorites()->where('product_id', $productId)->first();
+        $response = [];
+        if($favorite) {
+            $response = [
+                'isRegisted' => true
+            ];
+        } else {
+            $response = [
+                'isRegisted' => false
+            ];
+        }
+
+        return response()->json($response);
     }
 
     /**

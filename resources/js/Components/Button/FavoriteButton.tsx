@@ -4,15 +4,15 @@ import { FiHeart } from "react-icons/fi";
 import styled from "styled-components";
 
 type Props = {
-    processing: boolean;
+    processing?: boolean;
     w?: { base?: string,  lg?: string };
     m?: { base?: string, lg?: string };
-    isRegisted: boolean;
-    onClick: () => void;
+    isRegisted?: boolean;
+    onClick?: () => void;
 };
 
 const FavoriteButton: FC<Props> = memo((props) => {
-    const { processing, isRegisted, onClick } = props;
+    const { processing, isRegisted, onClick = undefined } = props;
 
     return (
         <form>
